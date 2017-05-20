@@ -140,7 +140,7 @@ Structural induction and recursion can be justified formally by set-theoretic ar
 However, intuitively they are implicit in what is meant by saying that ``derivations are what we obtain by applying rules one by one,'' just as ordinary mathematical induction is implicit in saying that ``the natural numbers are what we obtain by starting with zero and constructing successors one by one'', and constructive type-theoretic foundations for mathematics often take them as axiomatic.
 From now on we will use structural induction and recursion on derivations in all type theories without further comment.
 
-However, it is proved, \cref{thm:poset-initial-1} enables us to reach conclusions about arbitrary posets by deriving judgments in type theory.
+However it is proved, \cref{thm:poset-initial-1} enables us to reach conclusions about arbitrary posets by deriving judgments in type theory.
 In our present trivial case this is not very useful, but as we will see it becomes more useful for more complicated structures.
 
 Another way to express the initiality theorem is to incorporate \cG into the rules.
@@ -479,7 +479,7 @@ Closely related to cut-admissibility is \textbf{cut-elimination}, which in our t
 
 Note that cut-elimination is a fairly straightforward consequence of cut-admissibility: the latter allows us to eliminate each cut one by one.
 This will nearly always be true for our type theories, so we will usually just prove cut admissibility and rarely remark on the cut-elimination theorem that follows from it.
-On the other hand, cut admissibility is a special case of cut-elimination, and sometimes people prove cut-elimination directly without explicitly using cut-elimination as a lemma.
+On the other hand, cut admissibility is a special case of cut-elimination, and sometimes people prove cut-elimination directly without explicitly using cut admissibility as a lemma.
 Under this approach, the inductive step in cut-admissibility is viewed instead as a step of ``pushing cuts upwards'' through a derivation: given a derivation as on the left below in the theory with cut, we transform it into the derivation on the right in which the cut is higher up.
 \begin{equation*}
   \inferrule*[right=cut]{\inferrule*{\sD_1\\\\\vdots}{A\types B} \\
@@ -998,7 +998,7 @@ This is convenient if we are given a sequent $A\types B$ and want to figure out 
 
 It also tells us nontrivial things about derivations.
 For instance, all the primitive rules have the property that every type appearing in their premises also appears as a sub-expression of some type in their conclusion.
-Thus, any (cut-free) \emph{derivation} of a sequent $A\types B$ must involves only types appearing as sub-expressions of $A$ and $B$.
+Thus, any (cut-free) \emph{derivation} of a sequent $A\types B$ must involve only types appearing as sub-expressions of $A$ and $B$.
 This is called the \textbf{subformula property}.
 
 The phrase \emph{sequent calculus}, like \emph{type theory}, is difficult to define precisely, but sequent calculi generally exhibit the properties we have observed in this subsection: admissibility of the identity rule (based on an axiom applying only to base types), admissibility of cut, type operations appearing only in the conclusions of rules, and the subformula property.
@@ -1320,7 +1320,7 @@ In general we will not bother to state these ``standard'' rules for $\equiv$, bu
     \inferrule{x:X\types M\equiv N:A \\ x:X\types N\equiv P:A}{x:X\types M\equiv P:A}\and
     \inferrule{f\in \cG(A,B) \\ x:X\types M\equiv N:A}{x:X\types f(M)\equiv f(N):B}\\
     \inferrule{x:X\types M\equiv N:B\times C}{x:X \types \pr1BC(M)\equiv \pr1BC(N):B}\and
-    \inferrule{x:X\types M\equiv N:B\times C}{x:X \types \pr2BC(M)\equiv \pr2BC(N):B}\and
+    \inferrule{x:X\types M\equiv N:B\times C}{x:X \types \pr2BC(M)\equiv \pr2BC(N):C}\and
     \inferrule{x:X\types M\equiv M':B \\ x:X\types N\equiv N':C}{x:X\types \pair MN\equiv \pair{M'}{N'}:B\times C}
   \end{mathpar}
   \caption{Equality rules for categories with products}
@@ -1330,7 +1330,7 @@ In general we will not bother to state these ``standard'' rules for $\equiv$, bu
 This completes the definition of the \textbf{unary type theory for categories with products under \cG}.
 
 \begin{rmk}\label{rmk:beta-reduction}
-  Note that unlike the equalities $h\circ (g\circ f) \equiv (h\circ g)\circ f$ from \cref{sec:category-cutful}, the $\beta$- and $\eta$-conversions are intutively ``directional'', with one side being ``simpler'' than the other.
+  Note that unlike the equalities $h\circ (g\circ f) \equiv (h\circ g)\circ f$ from \cref{sec:category-cutful}, the $\beta$- and $\eta$-conversions are intuitively ``directional'', with one side being ``simpler'' than the other.
   This suggests that we should be able to ``reduce'' an arbitrary term to a ``simplest possible form'' by successively applying $\beta$- and $\eta$-conversions.
   Such is indeed the case (although for technical reasons the $\eta$-conversion is usually applied in the less intuitive right-to-left direction and called an ``expansion'' rather than a ``reduction'').
   This \emph{process of reduction} (and expansion) belongs to the ``computational'' side of type theory, which (though of course important in its own right) is somewhat tangential to our category-theoretic emphasis, so we will not discuss it in detail.
@@ -1344,7 +1344,7 @@ This completes the definition of the \textbf{unary type theory for categories wi
   \end{mathpar}
   Categorically, these will represent the objects of a category, the morphisms of a category, and the equalities between those morphisms.
   We have discussed how in the morphism judgment $x:A\types M:B$, the term $x.M$ is an annotation that isomorphically represents a particular derivation of the un-annotated judgment $A\types B$.
-  In the object judgment $\types A\type$, we can similarly regard $A$ as a term annotation isomorphically representing a particular derivation of an un-annotatated judgment ``$\types\ftype$''.
+  In the object judgment $\types A\type$, we can similarly regard $A$ as a term annotation isomorphically representing a particular derivation of an un-annotated judgment ``$\types\ftype$''.
   (We could thus write it as $\types A:\ftype$ or $A:(\types \ftype)$, but we generally don't, to avoid confusion with elements of the ``universe types'' that will be introduced much later.)
 
   By contrast, the equality judgment $x:A\types M\equiv N:B$ is the \emph{un-annotated} version; we have not introduced any terms representing its derivations.
@@ -1373,7 +1373,7 @@ This completes the definition of the \textbf{unary type theory for categories wi
 As with \cref{thm:category-cutadm}, this proof can be regarded as \emph{defining} recursively what it means to ``substitute'' $M$ for $y$ in $N$.
 The defining clauses are
 \begin{align*}
-  N[M/y] &= M\\
+  y[M/y] &= M\\
   (f(N))[M/y] &= f(N[M/y])\\
   \ttt[M/y] &= \ttt\\
   (\pi_1(N))[M/y] &= \pi_1(N[M/y])\\
